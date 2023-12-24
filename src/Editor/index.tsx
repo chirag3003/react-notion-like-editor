@@ -20,6 +20,12 @@ const Editor = () => {
     setValues(newValues);
     setFocusedInput(index+1)
   }
+  function onDelete(index:number){
+    const newValues = [...values];
+    newValues.splice(index,1)
+    setValues(newValues);
+    setFocusedInput(Math.max(0,index-1))
+  }
   function changeValue(index: number, value: string) {
     values[index].value = value;
   }
@@ -28,6 +34,12 @@ const Editor = () => {
     const input = document.querySelector(`.input-container:nth-child(${focusedInput + 1}) .input`) as HTMLDivElement
     // input?.click()
     input?.focus()
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.setStart(input, input.childNodes.length);
+    range.collapse(true);
+    selection?.removeAllRanges();
+    selection?.addRange(range);
   }, [focusedInput]);
 
   return (
@@ -44,6 +56,7 @@ const Editor = () => {
             onEnter={onEnter}
             index={index}
             changeValue={changeValue}
+            onDelete={onDelete}
           />
         );
       })}
