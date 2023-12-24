@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Value } from "../types";
 import EditorInput from "./EditorInput";
 
@@ -9,6 +9,7 @@ const Editor = () => {
       value: "Heading",
     },
   ]);
+  const [focusedInput,setFocusedInput] = useState<number>(0);
 
   function onEnter(index: number) {
     const newValues = [...values];
@@ -17,11 +18,18 @@ const Editor = () => {
       value: "",
     });
     setValues(newValues);
+    setFocusedInput(index+1)
   }
   function changeValue(index: number, value: string) {
     values[index].value = value;
   }
-  console.log(values);
+
+  useEffect(() => {
+    const input = document.querySelector(`.input-container:nth-child(${focusedInput + 1}) .input`) as HTMLDivElement
+    // input?.click()
+    input?.focus()
+  }, [focusedInput]);
+
   return (
     <div
       className={

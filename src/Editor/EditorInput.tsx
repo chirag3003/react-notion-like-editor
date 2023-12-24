@@ -9,7 +9,7 @@ interface EditorInputProps {
 
 function EditorInput({ value, onEnter, index, changeValue }: EditorInputProps) {
   return (
-    <div className="w-full">
+    <div className="w-full border border-gray-100 p-2 shadow input-container">
       <div
         onBeforeInput={(e) => {
           const evt = e.nativeEvent as KeyboardEvent;
@@ -23,9 +23,10 @@ function EditorInput({ value, onEnter, index, changeValue }: EditorInputProps) {
         }}
         onInput={(e) => {
           const text = e.currentTarget.textContent;
+          console.log(text)
           changeValue(index, text || "");
         }}
-        className="w-full text-5xl font-bold"
+        className="w-full text-5xl font-bold outline-none input "
         contentEditable={true}
         dangerouslySetInnerHTML={{ __html: value.value }}
       >
