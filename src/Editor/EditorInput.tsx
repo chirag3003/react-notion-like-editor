@@ -17,7 +17,7 @@ function EditorInput({
   onDelete,
 }: EditorInputProps) {
   return (
-    <div className="w-full border border-gray-100 p-2 shadow input-container flex gap-5 group">
+    <div className="w-full border border-gray-100 p-2 shadow input-container flex gap-5 group relative">
       <button className="dragButton invisible group-hover:visible ">
         <GripVertical height={25} width={25} className="h-full text-gray-500" />
       </button>
@@ -46,6 +46,13 @@ function EditorInput({
         dangerouslySetInnerHTML={{ __html: value.value }}
       >
         {/* {value.value} */}
+      </div>
+      <div className="options-menu absolute w-80 top-full left-10  bg-gray-50 shadow ">
+        <div className="menu-item text-xl p-2 font-semibold bg-white">Heading 1</div>
+        <div className="menu-item text-xl p-2 font-semibold ">Heading 2</div>
+        <div className="menu-item text-xl p-2 font-semibold ">Heading 3</div>
+        <div className="menu-item text-xl p-2 font-semibold ">Paragraph</div>
+        {/* <div className="menu-item">Heading 1    </div> */}
       </div>
     </div>
   );
